@@ -3,9 +3,16 @@ import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
 
 function publicClient() {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_PUBLISHABLE_KEY;
+
+  if (!url || !key) {
+    throw new Error("Missing Supabase environment variables.");
+  }
+
   return createClient<Database>(
-    "https://qsmhttdytievibgpdqde.supabase.co",
-    "sb_publishable_kmr5xi7zTGb56Ho53ZKjAw_zxSUMEVl",
+    url,
+    key,
     {
       auth: {
         storage: undefined,
