@@ -10,14 +10,11 @@ var import_jsx_runtime = require_jsx_runtime();
 var DISCIPLINES = [
 	"Contemporary",
 	"Bollywood Fusion",
-	"Kathak",
 	"Hip-Hop",
-	"Bharatanatyam",
 	"Jazz Funk",
 	"Lyrical",
 	"Bridal Choreography",
 	"Cinematic",
-	"Belly Dance"
 ];
 var STATS = [
 	{

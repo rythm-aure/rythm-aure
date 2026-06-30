@@ -31,8 +31,8 @@ export const Route = createFileRoute("/")({
 });
 
 const DISCIPLINES = [
-  "Contemporary", "Bollywood Fusion", "Kathak", "Hip-Hop", "Bharatanatyam",
-  "Jazz Funk", "Lyrical", "Bridal Choreography", "Cinematic", "Belly Dance",
+  "Contemporary", "Bollywood Fusion", "Hip-Hop",
+  "Jazz Funk", "Lyrical", "Bridal Choreography", "Cinematic",
 ];
 
 const STATS = [
