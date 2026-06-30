@@ -81,13 +81,26 @@ export const getMyBookings = createServerFn({ method: "GET" })
 export const getMyRole = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
+    console.log("Current User ID:", context.userId);
+
     const { data, error } = await context.supabase
       .from("user_roles")
       .select("role")
       .eq("user_id", context.userId);
+
+    console.log("DB Result:", data);
+    console.log("DB Error:", error);
+
     if (error) throw new Error(error.message);
+
     const roles = (data ?? []).map((r) => r.role);
-    return { roles, isAdmin: roles.includes("admin") };
+
+    console.log("Roles:", roles);
+
+    return {
+      roles,
+      isAdmin: roles.includes("admin"),
+    };
   });
 
 export const getMyProfile = createServerFn({ method: "GET" })
