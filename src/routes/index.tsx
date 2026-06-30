@@ -218,7 +218,7 @@ function Home() {
           <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_80%_30%,rgba(212,175,90,0.18),transparent_70%)]" />
           <div className="relative mx-auto grid w-full max-w-7xl gap-16 px-6 py-24 sm:px-10 md:grid-cols-2 md:items-center">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.4em] text-accent">The atelier</p>
+              <p className="text-[11px] uppercase tracking-[0.4em] text-accent">here we go again</p>
               <h2 className="mt-4 font-display text-5xl leading-tight md:text-7xl">
                 {s?.about_title ?? "Where rhythm meets elegance."}
               </h2>
