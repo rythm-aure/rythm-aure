@@ -27,6 +27,7 @@ function createSupabaseClient() {
 		}
 	});
 }
+
 var _supabase;
 var supabase = new Proxy({}, { get(_, prop, receiver) {
 	if (!_supabase) _supabase = createSupabaseClient();

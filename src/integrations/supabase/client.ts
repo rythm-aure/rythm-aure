@@ -28,24 +28,24 @@ function createSupabaseFetch(supabaseKey: string): typeof fetch {
 
 
 function createSupabaseClient() {
-  // Use import.meta.env for client-side (Vite build-time replacement)
-  // Fall back to process.env for SSR (server-side rendering)
-  const SERVER_SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || process.env.SERVER_SUPABASE_URL;
-  const SERVER_SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || process.env.SERVER_SUPABASE_PUBLISHABLE_KEY;
+  // Browser-only: Use VITE_* prefixed environment variables (replaced at Vite build time)
+  // These must be available in the Netlify build environment
+  const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+  const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
-  if (!SERVER_SUPABASE_URL || !SERVER_SUPABASE_PUBLISHABLE_KEY) {
+  if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
     const missing = [
-      ...(!SERVER_SUPABASE_URL ? ['SERVER_SUPABASE_URL'] : []),
-      ...(!SERVER_SUPABASE_PUBLISHABLE_KEY ? ['SERVER_SUPABASE_PUBLISHABLE_KEY'] : []),
+      ...(!SUPABASE_URL ? ['VITE_SUPABASE_URL'] : []),
+      ...(!SUPABASE_PUBLISHABLE_KEY ? ['VITE_SUPABASE_PUBLISHABLE_KEY'] : []),
     ];
-    const message = `Missing Supabase environment variable(s): ${missing.join(', ')}. Connect Supabase in Lovable Cloud.`;
+    const message = `Missing Supabase environment variable(s): ${missing.join(', ')}. Ensure VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY are set in your build environment.`;
     console.error(`[Supabase] ${message}`);
     throw new Error(message);
   }
 
-  return createClient<Database>(SERVER_SUPABASE_URL, SERVER_SUPABASE_PUBLISHABLE_KEY, {
+  return createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
     global: {
-      fetch: createSupabaseFetch(SERVER_SUPABASE_PUBLISHABLE_KEY),
+      fetch: createSupabaseFetch(SUPABASE_PUBLISHABLE_KEY),
     },
     auth: {
       storage: typeof window !== 'undefined' ? localStorage : undefined,
