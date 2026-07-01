@@ -1,38 +1,19 @@
-# Netlify configuration for TanStack Start with Supabase
-# This ensures proper environment variable handling during build
-
 [build]
-  # Build command uses Vite with Netlify preset
-  command = "npm run build"
-  # Output directory for Vite build
-  publish = ".output/public"
-  # Functions directory for Netlify Functions
-  functions = ".output/server"
+command = "npm run build"
+publish = ".output/public"
+functions = ".output/server"
 
 [build.environment]
-  # Ensure Node.js version compatibility with the build
-  NODE_VERSION = "22"
-
-# Environment variables are configured in Netlify UI, but you can also override here
-# Make sure these are set in your Netlify dashboard:
-# - VITE_SUPABASE_URL
-# - VITE_SUPABASE_PUBLISHABLE_KEY
-# - SERVER_SUPABASE_URL
-# - SERVER_SUPABASE_PUBLISHABLE_KEY
-
-[[redirects]]
-  # SPA routing - redirect all requests to index for client-side routing
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-# Cache configuration
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+NODE_VERSION = "22"
 
 [[headers]]
-  for = "/"
-  [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
+for = "/assets/*"
+
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "/"
+
+[headers.values]
+Cache-Control = "no-cache, no-store, must-revalidate"
